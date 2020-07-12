@@ -32,7 +32,7 @@ form.addEventListener('submit', evt => {
     brand: form.brand.value,
     model: form.model.value,
     price: form.price.value,
-    imgUrl: form.image.value
+    imgUrl: carImgUrl
   };
 
   db.collection('cars').add(car)

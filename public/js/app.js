@@ -42,28 +42,33 @@ if ('Notification' in navigator.serviceWorker) {
 // END NOTIFICATION
 
 // S T A R T    C A M E R A    I N T E G R A T I O N 
+const carImgUrl;
+
 function upload() {
-  const ref = firebase.storage().ref() 
-  const filePicker = document.getElementById('image').files[0];
-  const name = new Date() + '-' + file.name;
-  // const meta
-
-
-
-  return new Promise(async (resolve, reject) => {
+  const ref = firebase.storage().ref();
+  const file = document.getElementById("image").files[0];
+  const name = new Date() + "-" + file.name;
+  const metaData = {
+    contentType: file.type,
+  };
+  const task = ref.child(name).put(file, metaData);
+  task
+    .then((snapshot) => snapshot.ref.getDownloadURL())
+    .then((url) => {
+      carImgUrl = url;
+    });
+  // return new Promise(async (resolve, reject) => {
     
-    if (!filePicker || !filePicker.files ||
-      filePicker.files.length <= 0) {
-      reject('No file selected.');
-      return;
-    }
-    const myFile = filePicker.files[0];
-    console.log(myFile);
+  //   if (!filePicker || !filePicker.files ||
+  //     filePicker.files.length <= 0) {
+  //     reject('No file selected.');
+  //     return;
+  //   }
+  //   const myFile = filePicker.files[0];
+  //   console.log(myFile);
 
-    resolve();
-  });
-
-  
+  //   resolve();
+  // });
 }
 // END CAMERA INTEGRATION
 
