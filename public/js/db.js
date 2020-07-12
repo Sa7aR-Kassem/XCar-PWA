@@ -31,7 +31,8 @@ form.addEventListener('submit', evt => {
   const car = {
     brand: form.brand.value,
     model: form.model.value,
-    price: form.price.value
+    price: form.price.value,
+    imgUrl: form.image.value
   };
 
   db.collection('cars').add(car)
@@ -40,6 +41,7 @@ form.addEventListener('submit', evt => {
   form.brand.value = '';
   form.model.value = '';
   form.price.value = '';
+  form.image.value = '';
 });
 
 // remove a car

@@ -5,40 +5,53 @@ if ('serviceWorker' in navigator) {
 }
 
 // START NOTIFICATION 
-Notification.requestPermission(function () {
+if ('Notification' in navigator.serviceWorker) {
   if (Notification.permission == 'granted') {
-    // navigator.serviceWorker.getRegistration().then(function (reg) {
-    //   var options = {
-    //     body: 'Here is a notification body!',
-    //     icon: 'images/example.png',
-    //     vibrate: [100, 50, 100],
-    //     data: {
-    //       dateOfArrival: Date.now(),
-    //       primaryKey: 1
-    //     },
-    //     actions: [{
-    //         action: 'explore',
-    //         title: 'Explore this new world',
-    //         icon: 'images/checkmark.png'
-    //       },
-    //       {
-    //         action: 'close',
-    //         title: 'Close notification',
-    //         icon: 'images/xmark.png'
-    //       },
-    //     ]
-    //   };
-    //   reg.showNotification('Hello world!', options);
-    // });
+    Notification.requestPermission(function () {
+      navigator.serviceWorker.getRegistration().then(function (reg) {
+        var options = {
+          body: 'Here is a notification body!',
+          icon: 'images/example.png',
+          vibrate: [100, 50, 100],
+          data: {
+            dateOfArrival: Date.now(),
+            primaryKey: 1
+          },
+          actions: [{
+              action: 'explore',
+              title: 'Explore this new world',
+              icon: 'images/checkmark.png'
+            },
+            {
+              action: 'close',
+              title: 'Close notification',
+              icon: 'images/xmark.png'
+            },
+          ]
+        };
+        reg.showNotification('Hello world!', options);
+      });
+    });
+  } else if (Notification.permission === "blocked") {
+    /* the user has previously denied push. Can't reprompt. */
+  } else {
+    /* show a prompt to the user */
   }
-});
+}
+
 // END NOTIFICATION
 
 // S T A R T    C A M E R A    I N T E G R A T I O N 
 function upload() {
-  return new Promise(async (resolve, reject) => {
-    const filePicker = document.querySelector('input');
+  const ref = firebase.storage().ref() 
+  const filePicker = document.getElementById('image').files[0];
+  const name = new Date() + '-' + file.name;
+  // const meta
 
+
+
+  return new Promise(async (resolve, reject) => {
+    
     if (!filePicker || !filePicker.files ||
       filePicker.files.length <= 0) {
       reject('No file selected.');
@@ -49,6 +62,8 @@ function upload() {
 
     resolve();
   });
+
+  
 }
 // END CAMERA INTEGRATION
 
