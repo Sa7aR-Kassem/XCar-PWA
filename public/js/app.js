@@ -6,7 +6,9 @@ if ("serviceWorker" in navigator) {
     .catch((err) => console.log("service worker not registered", err));
 }
 
-// START NOTIFICATION
+
+
+//    S T A R T    N O T I F I C A T I O N
 if ("Notification" in navigator.serviceWorker) {
   if (Notification.permission == "granted") {
     Notification.requestPermission(function () {
@@ -19,8 +21,7 @@ if ("Notification" in navigator.serviceWorker) {
             dateOfArrival: Date.now(),
             primaryKey: 1,
           },
-          actions: [
-            {
+          actions: [{
               action: "explore",
               title: "Explore this new world",
               icon: "images/checkmark.png",
@@ -42,7 +43,11 @@ if ("Notification" in navigator.serviceWorker) {
   }
 }
 
-// END NOTIFICATION
+//    E N D        N O T I F I C A T I O N
+
+
+
+
 
 // S T A R T    C A M E R A    I N T E G R A T I O N
 let carImgUrl = "";
@@ -61,58 +66,45 @@ function upload() {
       carImgUrl = url;
       enableAdd = true;
     });
-  // return new Promise(async (resolve, reject) => {
-
-  //   if (!filePicker || !filePicker.files ||
-  //     filePicker.files.length <= 0) {
-  //     reject('No file selected.');
-  //     return;
-  //   }
-  //   const myFile = filePicker.files[0];
-  //   console.log(myFile);
-
-  //   resolve();
-  // });
 }
-// END CAMERA INTEGRATION
+// E N D       C A M E R A    I N T E G R A T I O N
 
-// START GEOLOCATION
-if (document.getElementById("locationResults")) {
-  document.getElementById("locationResults").style.display = "none";
-  if (navigator.geolocation) {
-    window.onload = function () {
-      var button = document.getElementById("location");
-      button.addEventListener("click", function () {
-        var startPos;
-        var geoOptions = {
-          enableHighAccuracy: true,
-          timeout: 10 * 1000,
-        };
-        var geoSuccess = function (position) {
-          startPos = position;
-          document.getElementById("startLat").innerHTML =
-            startPos.coords.latitude;
-          document.getElementById("startLon").innerHTML =
-            startPos.coords.longitude;
-          document.getElementById("locationResults").style.display = "block";
-        };
-        var geoError = function (error) {
-          console.log("Error occurred. Error code: " + error.code);
-          // error.code can be:
-          //   0: unknown error
-          //   1: permission denied
-          //   2: position unavailable (error response from location provider)
-          //   3: timed out
-        };
-        navigator.geolocation.getCurrentPosition(
-          geoSuccess,
-          geoError,
-          geoOptions
-        );
-      });
+
+
+
+//    S T A R T    G E O L O C I C A T I O N
+if (navigator.geolocation) {
+  var button = document.getElementById("location");
+  button.addEventListener("click", function () {
+    var startPos;
+    var geoOptions = {
+      enableHighAccuracy: true,
+      timeout: 10 * 1000,
     };
-  } else {
-    console.log("Geolocation is not supported for this Browser/OS");
-  }
+    var geoSuccess = function (position) {
+      startPos = position;
+      document.getElementById("startLat").innerHTML =
+        startPos.coords.latitude;
+      document.getElementById("startLon").innerHTML =
+        startPos.coords.longitude;
+      document.getElementById("locationResults").style.display = "block";
+    };
+    var geoError = function (error) {
+      console.log("Error occurred. Error code: " + error.code);
+      // error.code can be:
+      //   0: unknown error
+      //   1: permission denied
+      //   2: position unavailable (error response from location provider)
+      //   3: timed out
+    };
+    navigator.geolocation.getCurrentPosition(
+      geoSuccess,
+      geoError,
+      geoOptions
+    );
+  });
+} else {
+  console.log("Geolocation is not supported for this Browser/OS");
 }
-// END GEOLOCATION
+
+//   E N D       G E O L O C I C A T I O N

@@ -126,3 +126,8 @@ form .input-field {
 .center {
   margin: 1rem 0;
 }
+
+
+#locationResults{
+  display: none;
+}
