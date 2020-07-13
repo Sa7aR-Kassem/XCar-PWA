@@ -42,7 +42,7 @@ if ('Notification' in navigator.serviceWorker) {
 // END NOTIFICATION
 
 // S T A R T    C A M E R A    I N T E G R A T I O N 
-const carImgUrl;
+let carImgUrl = '';
 
 function upload() {
   const ref = firebase.storage().ref();

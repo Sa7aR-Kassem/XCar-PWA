@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const renderCar = (data, id) => {
 
   const html = `
-    <div class="card-panel car white row" data-id="${id}">
+    <div class="card-panel car grey darken-4 white-text row" data-id="${id}">
       <img src='${data.imgUrl}' alt="car thumb">
       <div class="car-details">
         <div class="car-brand">${data.brand}</div>
