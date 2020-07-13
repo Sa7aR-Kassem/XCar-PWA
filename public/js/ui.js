@@ -1,12 +1,12 @@
-const cars = document.querySelector('.cars');
+const cars = document.querySelector(".cars");
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
   // nav menu
-  const menus = document.querySelectorAll('.side-menu');
-  M.Sidenav.init(menus, {edge: 'right'});
+  const menus = document.querySelectorAll(".side-menu");
+  M.Sidenav.init(menus, { edge: "right" });
   // add car form
-  const forms = document.querySelectorAll('.side-form');
-  M.Sidenav.init(forms, {edge: 'left'});
+  const forms = document.querySelectorAll(".side-form");
+  M.Sidenav.init(forms, { edge: "left" });
 });
 
 // render car data

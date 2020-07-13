@@ -1,35 +1,38 @@
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js')
-    .then(reg => console.log('service worker registered'))
-    .catch(err => console.log('service worker not registered', err));
+let enableAdd = false;
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/sw.js")
+    .then((reg) => console.log("service worker registered"))
+    .catch((err) => console.log("service worker not registered", err));
 }
 
-// START NOTIFICATION 
-if ('Notification' in navigator.serviceWorker) {
-  if (Notification.permission == 'granted') {
+// START NOTIFICATION
+if ("Notification" in navigator.serviceWorker) {
+  if (Notification.permission == "granted") {
     Notification.requestPermission(function () {
       navigator.serviceWorker.getRegistration().then(function (reg) {
         var options = {
-          body: 'Here is a notification body!',
-          icon: 'images/example.png',
+          body: "Here is a notification body!",
+          icon: "images/example.png",
           vibrate: [100, 50, 100],
           data: {
             dateOfArrival: Date.now(),
-            primaryKey: 1
+            primaryKey: 1,
           },
-          actions: [{
-              action: 'explore',
-              title: 'Explore this new world',
-              icon: 'images/checkmark.png'
+          actions: [
+            {
+              action: "explore",
+              title: "Explore this new world",
+              icon: "images/checkmark.png",
             },
             {
-              action: 'close',
-              title: 'Close notification',
-              icon: 'images/xmark.png'
+              action: "close",
+              title: "Close notification",
+              icon: "images/xmark.png",
             },
-          ]
+          ],
         };
-        reg.showNotification('Hello world!', options);
+        reg.showNotification("Hello world!", options);
       });
     });
   } else if (Notification.permission === "blocked") {
@@ -41,11 +44,12 @@ if ('Notification' in navigator.serviceWorker) {
 
 // END NOTIFICATION
 
-// S T A R T    C A M E R A    I N T E G R A T I O N 
-let carImgUrl = '';
+// S T A R T    C A M E R A    I N T E G R A T I O N
+let carImgUrl = "";
 
 function upload() {
   const ref = firebase.storage().ref();
+  console.log(document.getElementById("image").files[0]);
   const file = document.getElementById("image").files[0];
   const name = new Date() + "-" + file.name;
   const metaData = {
@@ -55,7 +59,9 @@ function upload() {
   task
     .then((snapshot) => snapshot.ref.getDownloadURL())
     .then((url) => {
+      alert("HELL");
       carImgUrl = url;
+      enableAdd = true;
     });
   // return new Promise(async (resolve, reject) => {
 
@@ -73,39 +79,42 @@ function upload() {
 // END CAMERA INTEGRATION
 
 // START GEOLOCATION
-if (document.getElementById('locationResults')) {
-  document.getElementById('locationResults').style.display = 'none';
+if (document.getElementById("locationResults")) {
+  document.getElementById("locationResults").style.display = "none";
   if (navigator.geolocation) {
     window.onload = function () {
-      var button = document.getElementById('location');
-      button.addEventListener('click', function () {
-
+      var button = document.getElementById("location");
+      button.addEventListener("click", function () {
         var startPos;
         var geoOptions = {
           enableHighAccuracy: true,
-          timeout: 10 * 1000
-        }
+          timeout: 10 * 1000,
+        };
         var geoSuccess = function (position) {
           startPos = position;
-          document.getElementById('startLat').innerHTML = startPos.coords.latitude;
-          document.getElementById('startLon').innerHTML = startPos.coords.longitude;
-          document.getElementById('locationResults').style.display = 'block';
+          document.getElementById("startLat").innerHTML =
+            startPos.coords.latitude;
+          document.getElementById("startLon").innerHTML =
+            startPos.coords.longitude;
+          document.getElementById("locationResults").style.display = "block";
         };
         var geoError = function (error) {
-          console.log('Error occurred. Error code: ' + error.code);
+          console.log("Error occurred. Error code: " + error.code);
           // error.code can be:
           //   0: unknown error
           //   1: permission denied
           //   2: position unavailable (error response from location provider)
           //   3: timed out
         };
-        navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
-      })
-
-
-    }
+        navigator.geolocation.getCurrentPosition(
+          geoSuccess,
+          geoError,
+          geoOptions
+        );
+      });
+    };
   } else {
-    console.log('Geolocation is not supported for this Browser/OS')
+    console.log("Geolocation is not supported for this Browser/OS");
   }
 }
 // END GEOLOCATION
