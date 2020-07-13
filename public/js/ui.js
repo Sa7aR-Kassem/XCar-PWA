@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // render car data
 const renderCar = (data, id) => {
-
+  let htmlContainer = document.createElement("div");
   const html = `
     <div class="card-panel car grey darken-4 white-text row" data-id="${id}">
       <img src='${data.imgUrl}' alt="car thumb">
@@ -25,8 +25,8 @@ const renderCar = (data, id) => {
       </div>
     </div>
   `;
-  cars.innerHTML += html;
-
+  htmlContainer.innerHTML = html;
+  cars.insertBefore(htmlContainer, cars.childNodes[0]);
 };
 
 // remove car

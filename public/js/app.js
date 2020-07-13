@@ -58,7 +58,7 @@ function upload() {
       carImgUrl = url;
     });
   // return new Promise(async (resolve, reject) => {
-    
+
   //   if (!filePicker || !filePicker.files ||
   //     filePicker.files.length <= 0) {
   //     reject('No file selected.');
@@ -75,33 +75,37 @@ function upload() {
 // START GEOLOCATION
 if (document.getElementById('locationResults')) {
   document.getElementById('locationResults').style.display = 'none';
-  window.onload = function () {
-    var button = document.getElementById('location');
-    button.addEventListener('click', function () {
+  if (navigator.geolocation) {
+    window.onload = function () {
+      var button = document.getElementById('location');
+      button.addEventListener('click', function () {
 
-      var startPos;
-      var geoOptions = {
-        enableHighAccuracy: true,
-        timeout: 10 * 1000
-      }
-      var geoSuccess = function (position) {
-        startPos = position;
-        document.getElementById('startLat').innerHTML = startPos.coords.latitude;
-        document.getElementById('startLon').innerHTML = startPos.coords.longitude;
-        document.getElementById('locationResults').style.display = 'block';
-      };
-      var geoError = function (error) {
-        console.log('Error occurred. Error code: ' + error.code);
-        // error.code can be:
-        //   0: unknown error
-        //   1: permission denied
-        //   2: position unavailable (error response from location provider)
-        //   3: timed out
-      };
-      navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
-    })
+        var startPos;
+        var geoOptions = {
+          enableHighAccuracy: true,
+          timeout: 10 * 1000
+        }
+        var geoSuccess = function (position) {
+          startPos = position;
+          document.getElementById('startLat').innerHTML = startPos.coords.latitude;
+          document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+          document.getElementById('locationResults').style.display = 'block';
+        };
+        var geoError = function (error) {
+          console.log('Error occurred. Error code: ' + error.code);
+          // error.code can be:
+          //   0: unknown error
+          //   1: permission denied
+          //   2: position unavailable (error response from location provider)
+          //   3: timed out
+        };
+        navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
+      })
 
 
+    }
+  } else {
+    console.log('Geolocation is not supported for this Browser/OS')
   }
 }
 // END GEOLOCATION

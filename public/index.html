@@ -44,7 +44,7 @@
 
   <!-- cars -->
 
-  <div class="cars container grey-text text-darken-1">
+  <div class="cars container bgImg grey-text text-darken-1">
 
     <div class="center">
       <a class="btn-floating btn-small btn-large add-btn sidenav-trigger" data-target="side-form">
@@ -72,9 +72,10 @@
         <input placeholder="e.g. 200000" id="price" type="text" class="validate">
         <label for="price">Price</label>
       </div>
-      <div class="input-field">
+      <div class="input-field file-field">
+        <input accept="image/x-png,image/jpeg,image/gif" id="image" onChange="upload()" type="file">
         <div class="file-path-wrapper">
-          <input accept="image/x-png,image/jpeg,image/gif" id="image" onChange="upload()" class="file-path validate" type="text" placeholder="Upload image">
+          <input class="file-path validate" type="text">
         </div>
         <label for="image" class="active">Image</label>
       </div>
