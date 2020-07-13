@@ -49,7 +49,6 @@ let carImgUrl = "";
 
 function upload() {
   const ref = firebase.storage().ref();
-  console.log(document.getElementById("image").files[0]);
   const file = document.getElementById("image").files[0];
   const name = new Date() + "-" + file.name;
   const metaData = {
@@ -59,7 +58,6 @@ function upload() {
   task
     .then((snapshot) => snapshot.ref.getDownloadURL())
     .then((url) => {
-      alert("HELL");
       carImgUrl = url;
       enableAdd = true;
     });
