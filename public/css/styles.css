@@ -120,7 +120,7 @@ form .input-field {
 .file-field .file-path-wrapper {
   padding: 0;
 }
-.file-path-wrapper .file-path {
+.file-path-wrapper .file-path, input {
   color: white;
 }
 .center {
