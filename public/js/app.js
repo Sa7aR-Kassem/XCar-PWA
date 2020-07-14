@@ -7,40 +7,40 @@ if ("serviceWorker" in navigator) {
 }
 
 //    S T A R T    N O T I F I C A T I O N
-if ("Notification" in navigator.serviceWorker) {
+// if ("Notification" in navigator.serviceWorker) {
+Notification.requestPermission(function () {
   if (Notification.permission == "granted") {
-    Notification.requestPermission(function () {
-      navigator.serviceWorker.getRegistration().then(function (reg) {
-        var options = {
-          body: "Here is a notification body!",
-          icon: "images/example.png",
-          vibrate: [100, 50, 100],
-          data: {
-            dateOfArrival: Date.now(),
-            primaryKey: 1,
+    navigator.serviceWorker.getRegistration().then(function (reg) {
+      var options = {
+        body: "Here is a notification body!",
+        icon: "images/example.png",
+        vibrate: [100, 50, 100],
+        data: {
+          dateOfArrival: Date.now(),
+          primaryKey: 1,
+        },
+        actions: [
+          {
+            action: "explore",
+            title: "Explore this new world",
+            icon: "images/checkmark.png",
           },
-          actions: [
-            {
-              action: "explore",
-              title: "Explore this new world",
-              icon: "images/checkmark.png",
-            },
-            {
-              action: "close",
-              title: "Close notification",
-              icon: "images/xmark.png",
-            },
-          ],
-        };
-        reg.showNotification("Hello world!", options);
-      });
+          {
+            action: "close",
+            title: "Close notification",
+            icon: "images/xmark.png",
+          },
+        ],
+      };
+      reg.showNotification("Hello world!", options);
     });
   } else if (Notification.permission === "blocked") {
     /* the user has previously denied push. Can't reprompt. */
   } else {
     /* show a prompt to the user */
   }
-}
+});
+// }
 
 //    E N D        N O T I F I C A T I O N
 
@@ -83,7 +83,7 @@ if (navigator.geolocation) {
         document.getElementById("locationResults").style.display = "block";
       };
       var geoError = function (error) {
-        console.log("Error occurred. Error code: " + error.code);
+        alert("Error occurred. Error code: " + error.code);
         // error.code can be:
         //   0: unknown error
         //   1: permission denied
@@ -98,6 +98,7 @@ if (navigator.geolocation) {
     });
   }
 } else {
+  alert("Geolocation is not supported for this Browser/OS");
   console.log("Geolocation is not supported for this Browser/OS");
 }
 

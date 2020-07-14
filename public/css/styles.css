@@ -21,11 +21,17 @@ nav .sidenav-trigger {
 
 /* layout */
 .bgImg {
-  background: url("../img/bg.png") center/cover no-repeat;
   height: 100vh;
   position: relative;
   padding: 20px;
   width: 100%;
+}
+.no-webp .bgImg {
+  background: url("../img/bg.png") center/cover no-repeat;
+}
+
+.webp .bgImg {
+  background: url("../img/bg.webp") center/cover no-repeat;
 }
 .bgImg::before {
   content: "";
@@ -113,6 +119,7 @@ input {
 .side-form button {
   background: var(--primary);
   box-shadow: 1px 1px 3px rgba(90, 90, 90, 0.2);
+  color: #000;
 }
 form .input-field {
   margin-top: 30px;
@@ -127,7 +134,10 @@ form .input-field {
   margin: 1rem 0;
 }
 
-
-#locationResults{
+#locationResults {
   display: none;
+}
+
+.btn-floating i {
+  color: #000;
 }
