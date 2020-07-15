@@ -1,13 +1,12 @@
 {
   "name": "X Zero Car",
-  "short_name": "XCar",
+  "short_name": "XZeroCar",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#000",
   "theme_color": "#c69131",
   "orientation": "portrait-primary",
-  "icons": [
-    {
+  "icons": [{
       "src": "/img/icons/icon-72x72.png",
       "type": "image/png",
       "sizes": "72x72"

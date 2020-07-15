@@ -127,7 +127,7 @@ form .input-field {
 .file-field .file-path-wrapper {
   padding: 0;
 }
-.file-path-wrapper .file-path, input {
+.file-path-wrapper .file-path, input, input::placeholder {
   color: white;
 }
 .center {

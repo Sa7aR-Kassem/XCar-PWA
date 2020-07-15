@@ -83,7 +83,7 @@
         <label for="price">Price</label>
       </div>
       <div class="input-field file-field">
-        <input accept="image/x-png,image/jpeg,image/gif" id="image" onChange="upload()" type="file">
+        <input accept="image/x-png,image/jpeg,image/gif" id="image" onChange="upload()" caputre="camera" type="file">
         <div class="file-path-wrapper">
           <label for="imgVi"></label>
           <input class="file-path validate" id="imgVi" type="text">
@@ -95,8 +95,7 @@
       </div>
     </form>
   </div>
-  <script src="./js/modernizr-custom.js"></script>
-  <script type="text/javascript" src="./js/materialize.min.js"></script>
+
   <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-storage.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-firestore.js"></script>
@@ -117,6 +116,9 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
   </script>
+  
+  <script type="text/javascript" src="./js/materialize.min.js"></script>
+  <script src="./js/modernizr-custom.js"></script>
   <script src="./js/app.js"></script>
   <script src="./js/db.js"></script>
   <script src="./js/ui.js"></script>

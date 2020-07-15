@@ -1,17 +1,18 @@
-const staticCacheName = "site-static-v5";
-const dynamicCacheName = "site-dynamic-v5";
+const staticCacheName = "site-static-v7";
+const dynamicCacheName = "site-dynamic-v7";
 const assets = [
   "/",
   "/index.html",
+  "/pages/about.html",
+  "/css/materialize.min.css",
+  "/css/styles.css",
+  "/js/materialize.min.js",
+  "/js/modernizr-custom.js",
   "/js/app.js",
   "/js/ui.js",
-  "/js/materialize.min.js",
-  "/css/styles.css",
-  "/css/materialize.min.css",
   "/img/car.jpg",
   "/img/logo.webp",
   "/img/bg.webp",
-  "/js/modernizr-custom.js",
   "https://fonts.googleapis.com/icon?family=Material+Icons",
   "https://fonts.gstatic.com/s/materialicons/v47/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2",
   "/pages/fallback.html",
@@ -30,7 +31,7 @@ const limitCacheSize = (name, size) => {
 
 // install event
 self.addEventListener("install", (evt) => {
-  // console.log('service worker installed');
+  console.log('service worker installed');
   evt.waitUntil(
     caches.open(staticCacheName).then((cache) => {
       console.log("caching shell assets");
@@ -41,10 +42,10 @@ self.addEventListener("install", (evt) => {
 
 // activate event
 self.addEventListener("activate", (evt) => {
-  //console.log('service worker activated');
+  console.log('service worker activated');
   evt.waitUntil(
     caches.keys().then((keys) => {
-      //console.log(keys);
+      // console.log(keys);
       return Promise.all(
         keys
           .filter((key) => key !== staticCacheName && key !== dynamicCacheName)
