@@ -106,6 +106,7 @@ nav .sidenav-trigger {
 
 .add-btn {
   z-index: 9;
+  font-display: optional;
 }
 
 /* form-styles */
@@ -140,4 +141,7 @@ form .input-field {
 
 .btn-floating i {
   color: #000;
+}
+.material-icons {
+  font-display: optional;
 }

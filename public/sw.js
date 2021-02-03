@@ -1,5 +1,5 @@
-const staticCacheName = "site-static-v7";
-const dynamicCacheName = "site-dynamic-v7";
+const staticCacheName = "site-static-v8";
+const dynamicCacheName = "site-dynamic-v8";
 const assets = [
   "/",
   "/index.html",
@@ -66,8 +66,10 @@ self.addEventListener("fetch", (evt) => {
             cacheRes ||
             fetch(evt.request).then((fetchRes) => {
               return caches.open(dynamicCacheName).then((cache) => {
+                if (!(evt.request.url.indexOf('http') === 0)) return;
                 cache.put(evt.request.url, fetchRes.clone());
                 // check cached items size
+
                 limitCacheSize(dynamicCacheName, 20);
                 return fetchRes;
               });
@@ -78,6 +80,7 @@ self.addEventListener("fetch", (evt) => {
           if (evt.request.url.indexOf(".html") > -1) {
             return caches.match("/pages/fallback.html");
           }
+        
         })
     );
   }
